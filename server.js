@@ -74,16 +74,15 @@ function checkRoute(cleanPath){
 
 function listener(req, res){
     let cleanPath = path.normalize(req.url);
+    if(!path.extname(cleanPath)) cleanPath += ".html";
     
-    if(cleanPath === "/index"){
+    if(cleanPath === "/index.html"){
         res.writeHead(301, {
             "Location": "/"
         });
         res.end();
         return;
     }
-    
-    if(!path.extname(cleanPath)) cleanPath += ".html";
     
     if(!checkRoute(cleanPath)){
         res.writeHead(404);
